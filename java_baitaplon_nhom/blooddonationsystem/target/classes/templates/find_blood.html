@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tra cứu máu</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>Tra cứu nhu cầu máu</h1>
+
+<form action="#" th:action="@{/api/inventory/search/by-blood-type}" method="get">
+    <label>Nhóm máu:</label>
+    <input type="text" name="bloodType" placeholder="VD: A+, O-" required />
+    <button type="submit">Tìm theo nhóm máu</button>
+</form>
+
+<form action="#" th:action="@{/api/inventory/search/by-component}" method="get">
+    <label>Nhóm máu:</label>
+    <input type="text" name="bloodType" placeholder="VD: B+, AB-" required />
+    <label>Thành phần:</label>
+    <select name="component">
+        <option value="Hồng cầu">Hồng cầu</option>
+        <option value="Huyết tương">Huyết tương</option>
+        <option value="Tiểu cầu">Tiểu cầu</option>
+    </select>
+    <button type="submit">Tìm theo thành phần</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nhóm máu</th>
+            <th>Thành phần</th>
+            <th>Hạn sử dụng</th>
+            <th>Còn sẵn</th>
+        </tr>
+    </thead>
+    <tbody th:unless="${units.empty}" th:each="unit : ${units}">
+        <tr>
+            <td th:text="${unit.id}">1</td>
+            <td th:text="${unit.bloodType}">A+</td>
+            <td th:text="${unit.component}">Hồng cầu</td>
+            <td th:text="${unit.expirationDate}">2025-07-30</td>
+            <td th:text="${unit.available}">true</td>
+        </tr>
+    </tbody>
+    <tr th:if="${units.empty}">
+        <td colspan="5">Không tìm thấy đơn vị máu</td>
+    </tr>
+</table>
+
+<script th:inline="javascript">
+
+</script>
+
+</body>
+</html>

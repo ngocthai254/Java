@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Người hiến gần bạn</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY"></script>
+</head>
+<body onload="initMap()">
+<h1>Hiển thị người hiến máu gần bạn</h1>
+<div id="map" style="height:500px; width:100%;"></div>
+
+<script th:inline="javascript">
+    /*[[[
+    var donors = [[${donors}]];
+    ]]]*/
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 12,
+            center: { lat: donors[0].latitude || 0, lng: donors[0].longitude || 0 }
+        });
+        donors.forEach(d => {
+            new google.maps.Marker({
+                position: { lat: d.latitude, lng: d.longitude },
+                map: map,
+                title: d.name + ' – Nhóm máu: ' + d.bloodType
+            });
+        });
+    }
+</script>
+</body>
+</html>
