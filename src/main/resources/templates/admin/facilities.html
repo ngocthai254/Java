@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách cơ sở y tế</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Danh sách Cơ Sở Y Tế</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Địa chỉ</th>
+        <th>Email</th>
+        <th>Điện thoại</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="facility : ${facilities}">
+        <td th:text="${facility.id}">1</td>
+        <td th:text="${facility.name}">Tên cơ sở</td>
+        <td th:text="${facility.address}">Địa chỉ</td>
+        <td th:text="${facility.email}">Email</td>
+        <td th:text="${facility.phone}">Số điện thoại</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
