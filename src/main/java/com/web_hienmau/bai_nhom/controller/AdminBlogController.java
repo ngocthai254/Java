@@ -25,7 +25,7 @@ public class AdminBlogController {
     public String listBlogs(Model model) {
         List<Blog> blogs = blogService.getAllBlogs();
         model.addAttribute("blogs", blogs);
-        return "admin/blogs"; // view hiển thị danh sách blog
+        return "admin/blogs"; 
     }
 
     @GetMapping("/add")

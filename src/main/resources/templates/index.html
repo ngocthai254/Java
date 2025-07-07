@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Chủ - Hiến Máu Nhân Đạo</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <h1>Chào mừng đến với Cổng thông tin Hiến Máu Nhân Đạo</h1>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <!-- NHÓM MÁU -->
+        <section>
+            <h2>Thông Tin Nhóm Máu</h2>
+            <ul>
+                <li th:each="nhom : ${dsNhomMau}">
+                    <strong th:text="${nhom.tenNhomMau}">Nhóm máu</strong>: 
+                    <span th:text="${nhom.moTa}">Mô tả</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- QUY TRÌNH -->
+        <section>
+            <h2>Quy Trình Hiến Máu</h2>
+            <ol>
+                <li th:each="buoc : ${danhSachBuoc}">
+                    <h3>
+                        Bước <span th:text="${buoc.soBuoc}">1</span>: 
+                        <span th:text="${buoc.tieuDeBuoc}">Tiêu đề</span>
+                    </h3>
+                    <p th:text="${buoc.moTaBuoc}">Mô tả bước</p>
+                    <small>Ước tính: <span th:text="${buoc.thoiGianUocTinhPhut}">0</span> phút</small>
+                </li>
+            </ol>
+        </section>
+
+        <!-- LỢI ÍCH -->
+        <section>
+            <h2>Lợi Ích Khi Hiến Máu</h2>
+            <div th:each="loiIch : ${danhSachLoiIch}" class="loi-ich">
+                <h3 th:text="${loiIch.tieuDeLoiIch}">Tiêu đề lợi ích</h3>
+                <p th:text="${loiIch.moTaLoiIch}">Mô tả lợi ích</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Hiến Máu Nhân Đạo - Nhóm bạn Trần Long Tứ</p>
+    </footer>
+</body>
+</html>
