@@ -19,7 +19,7 @@ import com.web_hienmau.bai_nhom.service.BloodRequestService;
 import com.web_hienmau.bai_nhom.service.DonorService;
 
 @Controller
-@RequestMapping("/admin/requests")
+@RequestMapping("/user/emergency")
 public class AdminRequestController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class AdminRequestController {
     public String listRequests(Model model) {
         List<BloodRequest> requests = bloodRequestService.findAll();
         model.addAttribute("requests", requests);
-        return "admin/requests"; // Trỏ đến templates/admin/requests.html
+        return "user/emergencyForm"; // Trỏ đến templates/admin/requests.html
     }
 
     // ✅ Duyệt một yêu cầu => thêm vào danh sách người hiến
@@ -77,5 +77,27 @@ public class AdminRequestController {
             redirect.addFlashAttribute("error", "Không tìm thấy yêu cầu.");
             return "redirect:/admin/requests";
         }
+    }
+
+    // ✅ THÊM MỚI: Đường dẫn sửa từ /emergency/form thành /admin/emergency/form
+    @GetMapping("/form") // đổi từ "/emergency/form" thành "/admin/emergency/form"
+    public String showEmergencyForm(Model model) {
+        model.addAttribute("request", new BloodRequest());
+        return "admin/emergencyForm"; // Trỏ đến templates/admin/emergencyForm.html
+    }
+
+    // ✅ Xử lý submit form
+    @PostMapping("/submit")
+    public String submitEmergencyForm(BloodRequest request, RedirectAttributes redirect) {
+        try {
+            bloodRequestService.save(request);
+            redirect.addFlashAttribute("message", "Yêu cầu đã được gửi thành công.");
+            redirect.addFlashAttribute("alertClass", "alert-success");
+        } catch (Exception e) {
+            redirect.addFlashAttribute("message", "Có lỗi xảy ra khi gửi yêu cầu.");
+            redirect.addFlashAttribute("alertClass", "alert-danger");
+        }
+
+        return "redirect:/admin/requests/form"; // quay lại form sau khi submit
     }
 }

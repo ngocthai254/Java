@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "blood_requests")
@@ -41,6 +42,34 @@ public class BloodRequest {
 
     @Column(name = "created_at", updatable = false)
     private final LocalDateTime createdAt;
+
+    // ✅ Các trường bổ sung để tương thích với form HTML
+    @Transient
+    private String patientName;
+
+    @Transient
+    private String rhFactor;
+
+    @Transient
+    private Integer unitsNeeded;
+
+    @Transient
+    private String urgencyLevel;
+
+    @Transient
+    private Long medicalFacilityId;
+
+    @Transient
+    private String contactPersonName;
+
+    @Transient
+    private String contactPersonPhone;
+
+    @Transient
+    private String contactPersonEmail;
+
+    @Transient
+    private String requestReason;
 
     // Constructors
     public BloodRequest() {
@@ -112,5 +141,76 @@ public class BloodRequest {
         return createdAt;
     }
 
-    // No setter for createdAt to protect integrity
+    // ✅ Getters/Setters cho các field @Transient
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public String getRhFactor() {
+        return rhFactor;
+    }
+
+    public void setRhFactor(String rhFactor) {
+        this.rhFactor = rhFactor;
+    }
+
+    public Integer getUnitsNeeded() {
+        return unitsNeeded;
+    }
+
+    public void setUnitsNeeded(Integer unitsNeeded) {
+        this.unitsNeeded = unitsNeeded;
+    }
+
+    public String getUrgencyLevel() {
+        return urgencyLevel;
+    }
+
+    public void setUrgencyLevel(String urgencyLevel) {
+        this.urgencyLevel = urgencyLevel;
+    }
+
+    public Long getMedicalFacilityId() {
+        return medicalFacilityId;
+    }
+
+    public void setMedicalFacilityId(Long medicalFacilityId) {
+        this.medicalFacilityId = medicalFacilityId;
+    }
+
+    public String getContactPersonName() {
+        return contactPersonName;
+    }
+
+    public void setContactPersonName(String contactPersonName) {
+        this.contactPersonName = contactPersonName;
+    }
+
+    public String getContactPersonPhone() {
+        return contactPersonPhone;
+    }
+
+    public void setContactPersonPhone(String contactPersonPhone) {
+        this.contactPersonPhone = contactPersonPhone;
+    }
+
+    public String getContactPersonEmail() {
+        return contactPersonEmail;
+    }
+
+    public void setContactPersonEmail(String contactPersonEmail) {
+        this.contactPersonEmail = contactPersonEmail;
+    }
+
+    public String getRequestReason() {
+        return requestReason;
+    }
+
+    public void setRequestReason(String requestReason) {
+        this.requestReason = requestReason;
+    }
 }

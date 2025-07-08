@@ -98,7 +98,7 @@
 
     <div th:if="${message}" th:text="${message}" th:class="${alertClass}"></div>
 
-    <form th:action="@{/emergency/submit}" th:object="${request}" method="post">
+    <form th:action="@{/user/emergency/submit}" th:object="${request}" method="post">
         <label>Họ tên bệnh nhân:</label>
         <input type="text" th:field="*{patientName}" required/>
 
