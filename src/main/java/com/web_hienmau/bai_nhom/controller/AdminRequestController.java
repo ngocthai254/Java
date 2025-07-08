@@ -98,6 +98,6 @@ public class AdminRequestController {
             redirect.addFlashAttribute("alertClass", "alert-danger");
         }
 
-        return "redirect:/admin/requests/form"; // quay lại form sau khi submit
+        return "redirect:/user/requests/form"; // quay lại form sau khi submit
     }
 }
