@@ -59,7 +59,13 @@
                     </div>
                     <div>
                         <label for="quantity" class="block text-sm font-medium text-gray-700">Số lượng (ml) *</label>
-                        <input type="number" id="quantity" name="quantity" required min="1" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Nhập số lượng máu (ml)">
+                        <select id="quantity" name="quantity" required class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                            <option value="">Chọn số lượng máu</option> <option value="120">120 ml</option>
+                            <option value="240">240 ml</option>
+                            <option value="360">360 ml</option>
+                            <option value="480">480 ml</option>
+                            <option value="520">520 ml</option>
+                        </select>
                     </div>
                     <div>
                         <label for="status" class="block text-sm font-medium text-gray-700">Trạng thái *</label>

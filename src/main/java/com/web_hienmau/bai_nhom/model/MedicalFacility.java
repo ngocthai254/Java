@@ -45,7 +45,6 @@ public class MedicalFacility {
         this.updatedAt = LocalDateTime.now();
     }
 
-    // --- Getters and Setters ---
 
     public Long getFacilityId() {
         return facilityId;

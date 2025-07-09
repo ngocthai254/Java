@@ -1,4 +1,4 @@
-package com.web_hienmau.bai_nhom.ropositories;
+package com.web_hienmau.bai_nhom.repositories;
 
 import com.web_hienmau.bai_nhom.model.QuyTrinhHienMau;
 import org.springframework.data.jpa.repository.JpaRepository;

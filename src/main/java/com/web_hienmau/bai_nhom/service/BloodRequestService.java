@@ -1,11 +1,13 @@
 package com.web_hienmau.bai_nhom.service;
 
-import com.web_hienmau.bai_nhom.model.BloodRequest;
-import com.web_hienmau.bai_nhom.ropositories.IBloodRequestRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.web_hienmau.bai_nhom.model.BloodRequest;
+import com.web_hienmau.bai_nhom.repositories.IBloodRequestRepository;
 
 @Service
 public class BloodRequestService {
@@ -19,5 +21,10 @@ public class BloodRequestService {
 
     public List<BloodRequest> findAll() {
         return repository.findAll();
+    }
+
+    // ✅ Hàm này dùng để tìm theo ID (dùng trong controller)
+    public Optional<BloodRequest> findById(Long id) {
+        return repository.findById(id);
     }
 }

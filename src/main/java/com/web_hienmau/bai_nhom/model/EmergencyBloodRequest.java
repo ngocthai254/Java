@@ -18,7 +18,7 @@ public class EmergencyBloodRequest {
     private String patientName;
     private String bloodGroup;
     private String rhFactor;
-    private Integer unitsNeeded; // ✅ Đã đổi từ int → Integer
+    private Integer unitsNeeded; 
     private String urgencyLevel;
     private Long medicalFacilityId;
     private String contactPersonName;
@@ -29,13 +29,11 @@ public class EmergencyBloodRequest {
     private LocalDateTime requestedAt;
     private LocalDateTime fulfilledAt;
 
-    // Constructor mặc định
     public EmergencyBloodRequest() {
         this.requestedAt = LocalDateTime.now();
         this.isFulfilled = false;
     }
 
-    // ======= GETTERS & SETTERS =======
 
     public Long getRequestId() {
         return requestId;

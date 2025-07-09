@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Quản lý đăng ký hiến máu</title>
+    <style>
+        /* Reset cơ bản */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff5f5;
+            margin: 0;
+            padding: 20px 30px;
+            color: #333;
+        }
+        h2 {
+            text-align: center;
+            color: #b71c1c; /* đỏ máu */
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px #f8bbd0;
+            font-weight: 700;
+        }
+        /* Message thông báo */
+        .message {
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(183, 28, 28, 0.3);
+            text-align: center;
+        }
+        .message.success {
+            background-color: #dcedc8; /* xanh nhạt */
+            color: #33691e;
+        }
+        .message.error {
+            background-color: #ffcdd2; /* đỏ nhạt */
+            color: #b71c1c;
+        }
+        /* Table */
+        table {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            box-shadow: 0 4px 10px rgb(183 28 28 / 0.2);
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        thead tr {
+            background: #b71c1c;
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        tbody tr {
+            background: #ffeaea;
+            transition: background-color 0.3s ease;
+            cursor: default;
+        }
+        tbody tr:hover {
+            background: #f8bbd0;
+        }
+        tbody tr td {
+            border-bottom: 1px solid #f0a1a1;
+            border-radius: 8px;
+        }
+        /* Status đẹp hơn */
+        td:nth-child(7) {
+            font-weight: 700;
+            color: #b71c1c;
+        }
+        /* Nút Duyệt */
+        form button {
+            background-color: #d32f2f;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(211, 47, 47, 0.5);
+            transition: background-color 0.3s ease;
+        }
+        form button:hover {
+            background-color: #9a1b1b;
+        }
+        /* Link Xem */
+        a {
+            margin-left: 12px;
+            color: #b71c1c;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #b71c1c;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        a:hover {
+            background-color: #b71c1c;
+            color: white;
+        }
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px 15px;
+            }
+            table {
+                font-size: 14px;
+            }
+            form button, a {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Danh sách đăng ký hiến máu</h2>
+
+    <div th:if="${message}" class="message success">
+        <b th:text="${message}"></b>
+    </div>
+    <div th:if="${error}" class="message error">
+        <b th:text="${error}"></b>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Họ tên</th>
+                <th>Nhóm máu</th>
+                <th>Giới tính</th>
+                <th>SĐT</th>
+                <th>Ngày yêu cầu</th>
+                <th>Số lượng</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="req : ${requests}">
+                <td th:text="${req.fullName}"></td>
+                <td th:text="${req.bloodGroup}"></td>
+                <td th:text="${req.gender}"></td>
+                <td th:text="${req.phone}"></td>
+                <td th:text="${req.requestDate}"></td>
+                <td th:text="${req.quantity}"></td>
+                <td th:text="${req.status}"></td>
+                <td>
+                    <form th:action="@{/admin/requests/approve/{id}(id=${req.id})}" method="post" style="display:inline;">
+                        <button type="submit">Duyệt</button>
+                    </form>
+                    <a th:href="@{/admin/requests/view/{id}(id=${req.id})}">Xem</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

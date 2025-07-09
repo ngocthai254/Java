@@ -22,7 +22,7 @@ public class EmergencyRequestController {
     @GetMapping("/form")
     public String showRequestForm(Model model) {
         model.addAttribute("request", new EmergencyBloodRequest());
-        return "emergency/requestForm"; // trỏ đến requestForm.html trong /templates/emergency/
+        return "emergency/requestForm"; 
     }
 
     @PostMapping("/submit")

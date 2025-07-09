@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm người hiến máu</title>
+    <style>
+        form { width: 60%; margin: 20px auto; }
+        label { display: block; margin-top: 10px; }
+        input, textarea, select { width: 100%; padding: 8px; margin-top: 5px; }
+        button { margin-top: 15px; background-color: #e53935; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Thêm người hiến máu</h2>
+    <form th:action="@{/admin/mau-da-hien/add}" th:object="${mauDaHien}" method="post">
+        <label>Họ tên:</label>
+        <input type="text" th:field="*{fullName}" required />
+
+        <label>Giới tính:</label>
+        <select th:field="*{gender}">
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+            <option value="Khác">Khác</option>
+        </select>
+
+        <label>Số điện thoại:</label>
+        <input type="text" th:field="*{phone}" required />
+
+        <label>Nhóm máu:</label>
+        <select th:field="*{bloodGroup}" required>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+        </select>
+
+        <label>Lượng máu (ml):</label>
+        <select th:field="*{quantity}" required>
+            <option value="120">120 ml</option>
+            <option value="240">240 ml</option>
+            <option value="360">360 ml</option>
+            <option value="480">480 ml</option>
+            <option value="520">520 ml</option>
+        </select>
+
+        <label>Ghi chú:</label>
+        <textarea th:field="*{note}"></textarea>
+
+        <label>Ngày yêu cầu:</label>
+        <input type="datetime-local" th:field="*{requestDate}" />
+
+        <label>Ngày tạo:</label>
+        <input type="datetime-local" th:field="*{createdAt}" />
+
+        <label>Trạng thái:</label>
+        <input type="text" th:field="*{status}" />
+
+        <button type="submit">Lưu</button>
+    </form>
+</body>
+</html>

@@ -8,20 +8,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user/blood-requests") // Đã thay đổi từ "/api/blood-requests"
-@CrossOrigin(origins = "*") // Cho phép request từ form HTML
+@RequestMapping("/user/blood-requests") 
+@CrossOrigin(origins = "*") 
 public class BloodRequestController {
 
     @Autowired
     private BloodRequestService service;
 
-    // API: Lưu yêu cầu hiến máu
     @PostMapping
     public BloodRequest create(@RequestBody BloodRequest request) {
         return service.save(request);
     }
-
-    // API: Lấy danh sách tất cả các yêu cầu
     @GetMapping
     public List<BloodRequest> getAll() {
         return service.findAll();

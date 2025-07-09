@@ -1,8 +1,14 @@
 package com.web_hienmau.bai_nhom.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "blood_requests")
@@ -34,14 +40,22 @@ public class BloodRequest {
     private String status;
 
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
+    @Column(nullable = true)
+    private String email; 
 
-    // Constructors
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public BloodRequest() {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -106,5 +120,4 @@ public class BloodRequest {
         return createdAt;
     }
 
-    // No setter for createdAt to protect integrity
 }

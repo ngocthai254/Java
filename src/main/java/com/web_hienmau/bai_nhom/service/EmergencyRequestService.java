@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.web_hienmau.bai_nhom.model.EmergencyBloodRequest;
-import com.web_hienmau.bai_nhom.ropositories.IEmergencyRequestRepository;
+import com.web_hienmau.bai_nhom.repositories.IEmergencyRequestRepository;
 
 @Service
 public class EmergencyRequestService {

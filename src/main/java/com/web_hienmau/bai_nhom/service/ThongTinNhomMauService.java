@@ -1,7 +1,7 @@
 package com.web_hienmau.bai_nhom.service;
 
 import com.web_hienmau.bai_nhom.model.ThongTinNhomMau;
-import com.web_hienmau.bai_nhom.ropositories.IThongTinNhomMauRepository;
+import com.web_hienmau.bai_nhom.repositories.IThongTinNhomMauRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

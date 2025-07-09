@@ -22,7 +22,6 @@ public class QuyTrinhHienMau {
     @Column(name = "thoi_gian_uoc_tinh_phut")
     private Integer thoiGianUocTinhPhut;
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

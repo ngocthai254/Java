@@ -16,7 +16,6 @@ public class LoiIchHienMau {
     @Column(name = "mo_ta_loi_ich", columnDefinition = "TEXT")
     private String moTaLoiIch;
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

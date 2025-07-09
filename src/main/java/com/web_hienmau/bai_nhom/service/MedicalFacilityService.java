@@ -1,7 +1,7 @@
 package com.web_hienmau.bai_nhom.service;
 
 import com.web_hienmau.bai_nhom.model.MedicalFacility;
-import com.web_hienmau.bai_nhom.ropositories.IMedicalFacilityRepository;
+import com.web_hienmau.bai_nhom.repositories.IMedicalFacilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

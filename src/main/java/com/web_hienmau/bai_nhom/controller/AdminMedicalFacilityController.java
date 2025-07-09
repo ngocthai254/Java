@@ -25,6 +25,6 @@ public class AdminMedicalFacilityController {
     public String listFacilities(Model model) {
         List<MedicalFacility> facilities = facilityService.getAllFacilities();
         model.addAttribute("facilities", facilities);
-        return "admin/facilities"; // Tên file Thymeleaf: admin/facilities.html
+        return "admin/facilities"; 
     }
 }

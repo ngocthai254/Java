@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Chi tiết yêu cầu hiến máu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff5f5;
+            margin: 20px 30px;
+            color: #333;
+        }
+        h2 {
+            color: #b71c1c;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: 1px 1px 4px #f8bbd0;
+        }
+        table {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            box-shadow: 0 4px 10px rgba(183, 28, 28, 0.2);
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        th {
+            background: #b71c1c;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            width: 35%;
+        }
+        tbody tr {
+            background: #ffeaea;
+            transition: background-color 0.3s ease;
+        }
+        tbody tr:hover {
+            background: #f8bbd0;
+        }
+        a {
+            display: inline-block;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px 18px;
+            background-color: #b71c1c;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 3px 6px rgba(183, 28, 28, 0.5);
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #7a0f0f;
+        }
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            body {
+                margin: 15px 10px;
+            }
+            table {
+                font-size: 14px;
+            }
+            th, td {
+                padding: 12px 15px;
+            }
+            a {
+                padding: 8px 14px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Chi tiết yêu cầu hiến máu</h2>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Họ tên</th>
+                <td th:text="${request.fullName}">Nguyễn Văn A</td>
+            </tr>
+            <tr>
+                <th>Giới tính</th>
+                <td th:text="${request.gender}">Nam</td>
+            </tr>
+            <tr>
+                <th>Nhóm máu</th>
+                <td th:text="${request.bloodGroup}">O+</td>
+            </tr>
+            <tr>
+                <th>Số điện thoại</th>
+                <td th:text="${request.phone}">0123456789</td>
+            </tr>
+            <tr>
+                <th>Ngày yêu cầu</th>
+                <td th:text="${request.requestDate}">2025-07-15</td>
+            </tr>
+            <tr>
+                <th>Số lượng</th>
+                <td th:text="${request.quantity}">1</td>
+            </tr>
+            <tr>
+                <th>Trạng thái</th>
+                <td th:text="${request.status}">Chờ duyệt</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="text-align: center;">
+        <a href="/mvc/admin/requests">← Quay lại danh sách</a>
+    </p>
+</body>
+</html>
