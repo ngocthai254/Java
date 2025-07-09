@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Duyệt người hiến máu</title>
+</head>
+<body>
+    <h2>Danh sách người đăng ký hiến máu chờ duyệt</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Họ tên</th>
+                <th>Nhóm máu</th>
+                <th>SĐT</th>
+                <th>Email</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="donor : ${donors}">
+                <td th:text="${donor.fullName}"></td>
+                <td th:text="${donor.bloodGroup}"></td>
+                <td th:text="${donor.phone}"></td>
+                <td th:text="${donor.email}"></td>
+                <td>
+                    <form th:action="@{/admin/donors/approve/{id}(id=${donor.id})}" method="post">
+                        <button type="submit">Duyệt</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/mvc/admin/donors">← Về danh sách người hiến máu</a>
+</body>
+</html>

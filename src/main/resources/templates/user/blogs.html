@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Bài Viết Của Bạn</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        .btn-add {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        .btn-add:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4 text-center text-primary">Bài Viết Của Bạn</h1>
+
+        <div th:if="${message}" th:classappend="${alertClass}" class="alert alert-dismissible fade show" role="alert">
+            <span th:text="${message}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="d-flex justify-content-end mb-3">
+            <a th:href="@{/user/blogs/add}" class="btn btn-add">
+                <i class="fas fa-plus-circle me-2"></i>Thêm Bài Viết Mới
+            </a>
+        </div>
+
+        <div th:if="${blogs.isEmpty()}" class="alert alert-info text-center">
+            Bạn chưa có bài viết nào. Hãy thêm một bài viết mới!
+        </div>
+
+        <div th:unless="${blogs.isEmpty()}">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div class="col" th:each="blog : ${blogs}">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary" th:text="${blog.title}">Tiêu đề bài viết</h5>
+                            <h6 class="card-subtitle mb-2 text-muted" th:text="${'Tác giả: ' + blog.author}">Tác giả</h6>
+                            <p class="card-text text-truncate" th:text="${blog.content}">Nội dung bài viết...</p>
+                            <p class="card-text">
+                                <small class="text-muted">Ngày đăng: <span th:text="${#temporals.format(blog.createdAt, 'dd/MM/yyyy HH:mm')}"></span></small>
+                            </p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

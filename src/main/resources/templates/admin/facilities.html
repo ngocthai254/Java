@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Cơ Sở Y Tế - Nơi Hồi Sinh Sự Sống</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">💖 Những Điểm Đến Của Lòng Nhân Ái 💖</h1>
+        <p class="subtitle">Tìm kiếm các bệnh viện và cơ sở y tế gần bạn để trao đi giọt máu hồng, lan tỏa sự sống!</p>
+
+        <div class="facility-grid">
+            <div class="facility-card" th:each="facility : ${facilities}">
+                <div class="card-header">
+                    <i class="fas fa-hospital-alt facility-icon"></i>
+                    <h2 class="facility-name" th:text="${facility.name}">Tên Bệnh Viện Mẫu</h2>
+                </div>
+                <div class="card-body">
+                    <p><i class="fas fa-id-badge"></i> <strong>ID:</strong> <span th:text="${facility.facilityId}">1</span></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Địa chỉ:</strong> <span th:text="${facility.address}">Địa chỉ bệnh viện mẫu</span></p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <span th:text="${facility.email}">email@example.com</span></p>
+                    <p><i class="fas fa-phone"></i> <strong>Điện thoại:</strong> <span th:text="${facility.phoneNumber}">0123456789</span></p>
+                    <p th:if="${facility.description}"><i class="fas fa-info-circle"></i> <strong>Mô tả:</strong> <span th:text="${facility.description}"></span></p>
+                    <p th:if="${facility.websiteUrl}"><i class="fas fa-globe"></i> <strong>Website:</strong> <a th:href="${facility.websiteUrl}" target="_blank" th:text="${facility.websiteUrl}"></a></p>
+                    <p th:if="${facility.openingHoursJson}"><i class="fas fa-clock"></i> <strong>Giờ mở cửa:</strong> <span th:text="${facility.openingHoursJson}"></span></p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{${'http://googleusercontent.com/maps.google.com/search?q=' + #uris.escapeQueryParam(facility.address)}}"
+                       target="_blank"
+                       class="btn-view-map">
+                        <i class="fas fa-directions"></i> Xem Bản Đồ
+                    </a>
+                </div>
+            </div>
+            <div class="no-data-message" th:if="${facilities.empty}">
+                <p><i class="fas fa-exclamation-circle"></i> Rất tiếc, chưa có cơ sở y tế nào được tìm thấy. Vui lòng thử lại sau!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

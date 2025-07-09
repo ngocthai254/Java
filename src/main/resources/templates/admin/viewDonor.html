@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Thông tin hồ sơ người hiến</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff5f5;
+            margin: 0;
+            padding: 20px 30px;
+            color: #333;
+        }
+        h2 {
+            text-align: center;
+            color: #b71c1c;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px #f8bbd0;
+            font-weight: 700;
+        }
+        p {
+            max-width: 600px;
+            margin: 8px auto;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        p strong {
+            color: #b71c1c;
+            display: inline-block;
+            width: 140px;
+        }
+        h3 {
+            max-width: 600px;
+            margin: 40px auto 20px auto;
+            color: #b71c1c;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 1px 1px 3px #f8bbd0;
+        }
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            box-shadow: 0 4px 10px rgb(183 28 28 / 0.2);
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        thead tr {
+            background: #b71c1c;
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        tbody tr {
+            background: #ffeaea;
+            transition: background-color 0.3s ease;
+        }
+        tbody tr:hover {
+            background: #f8bbd0;
+        }
+        tbody tr td {
+            border-bottom: 1px solid #f0a1a1;
+            border-radius: 8px;
+        }
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px 15px;
+            }
+            p {
+                font-size: 14px;
+            }
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Hồ sơ người hiến máu</h2>
+
+    <p><strong>Họ tên:</strong> <span th:text="${donor.fullName}"></span></p>
+    <p><strong>Giới tính:</strong> <span th:text="${donor.gender}"></span></p>
+    <p><strong>Ngày sinh:</strong> <span th:text="${donor.birthDate}"></span></p>
+    <p><strong>SĐT:</strong> <span th:text="${donor.phone}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${donor.email}"></span></p>
+    <p><strong>Địa chỉ:</strong> <span th:text="${donor.address}"></span></p>
+    <p><strong>Nhóm máu:</strong> <span th:text="${donor.bloodGroup}"></span></p>
+
+    <h3>Lịch sử hiến máu</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ngày hiến</th>
+                <th>Số lượng (ml)</th>
+                <th>Địa điểm</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="donation : ${donations}">
+                <td th:text="${donation.donationDate}"></td>
+                <td th:text="${donation.quantity}"></td>
+                <td th:text="${donation.location}"></td>
+                <td th:text="${donation.status}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

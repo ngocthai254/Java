@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thống kê máu đã hiến</title>
+    <style>
+        table { width: 70%; margin: 30px auto; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background-color: #e53935; color: white; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Thống kê máu đã hiến theo nhóm máu</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Nhóm máu</th>
+            <th>Tổng lượng (ml)</th>
+            <th>Tổng lượng (lít)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${thongKe}">
+            <td th:text="${entry.bloodGroup}">A</td>
+            <td th:text="${entry.totalMl} + ' ml'">1000</td>
+            <td th:text="${#numbers.formatDecimal(entry.totalLit, 1, 2)} + ' L'">1.00</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

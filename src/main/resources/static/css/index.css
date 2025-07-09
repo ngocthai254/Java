@@ -1,0 +1,226 @@
+body {
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #e0eafc, #cfdef3);
+    color: #34495e;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: linear-gradient(135deg, #b71c1c, #d32f2f);
+    color: white;
+    text-align: center;
+    padding: 15px 30px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+main {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+section {
+    padding: 25px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: calc(100vh - 180px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: #b71c1c;
+    border-bottom: 3px solid #d32f2f;
+    padding-bottom: 8px;
+    font-weight: 600;
+}
+
+section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+section ul li {
+    background: #ffebee;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-left: 5px solid #d32f2f;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.5;
+    transition: background-color 0.2s ease, border-left-color 0.2s ease;
+}
+
+section ul li:hover {
+    background-color: #ffebf0;
+    border-left-color: #b71c1c;
+}
+
+section ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding: 0;
+    margin: 0;
+}
+
+section ol li {
+    counter-increment: step-counter;
+    margin-bottom: 15px;
+    background-color: #e3f2fd;
+    padding: 15px 20px;
+    border-left: 5px solid #2196f3;
+    border-radius: 8px;
+    position: relative;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+section ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #2196f3;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+section ol li h3 {
+    margin: 0 0 5px;
+    font-size: 1.1rem;
+    color: #1a237e;
+    padding-left: 25px;
+}
+
+section ol li small {
+    color: #555;
+    font-size: 0.85rem;
+    display: block;
+    padding-left: 25px;
+}
+
+section .loi-ich {
+    background: #fff8e1;
+    padding: 12px 15px;
+    border-left: 5px solid #ffc107;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+section .loi-ich h3 {
+    margin: 0 0 5px;
+    font-size: 1.1rem;
+    color: #795548;
+}
+
+section .loi-ich p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5d4037;
+}
+
+footer {
+    background: #37474f;
+    color: #eceff1;
+    text-align: center;
+    padding: 15px 20px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    section {
+        max-height: none;
+    }
+
+    section h2 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+
+    section ol li::before {
+        left: -10px;
+    }
+
+    section ol li h3, section ol li small {
+        padding-left: 20px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

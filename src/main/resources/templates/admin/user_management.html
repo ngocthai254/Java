@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Người Dùng - Ngân Hàng Máu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-red-50 font-roboto">
+    <div class="min-h-screen flex flex-col">
+        <header class="bg-red-600 text-white p-4 shadow-md">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-2xl font-bold">Ngân Hàng Máu - Quản Lý Người Dùng</h1>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm">Xin chào, Admin</span>
+                    <a href="/logout" class="bg-red-800 hover:bg-red-900 text-white px-4 py-2 rounded">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="container mx-auto p-6 flex-grow">
+            <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <form th:action="@{/admin/users}" method="get" class="flex items-center space-x-4 w-full md:w-1/2 mb-4 md:mb-0">
+                        <input type="text" id="searchInput" name="search" th:value="${searchTerm}" placeholder="Tìm kiếm người dùng..." class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Tìm kiếm</button>
+                    </form>
+                    <a th:href="@{/admin/users/add}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Thêm người dùng</a>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Danh sách người dùng</h2>
+                <div th:if="${message}" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span th:text="${message}"></span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-red-100">
+                                <th class="p-3">STT</th>
+                                <th class="p-3">ID</th>
+                                <th class="p-3">Tên</th>
+                                <th class="p-3">Địa chỉ</th>
+                                <th class="p-3">Email</th>
+                                <th class="p-3">SĐT</th>
+                                <th class="p-3">Giới tính</th>
+                                <th class="p-3">Nhóm máu</th>
+                                <th class="p-3">Hoạt động</th>
+                                <th class="p-3">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <tr th:each="user, iStat : ${users}" class="border-b hover:bg-red-50">
+                                <td class="p-3" th:text="${iStat.index + 1}"></td>
+                                <td class="p-3" th:text="${user.id}"></td>
+                                <td class="p-3" th:text="${user.fullName}"></td>
+                                <td class="p-3" th:text="${user.address}"></td>
+                                <td class="p-3" th:text="${user.email}"></td>
+                                <td class="p-3" th:text="${user.phone}"></td>
+                                <td class="p-3" th:text="${user.gender}"></td>
+                                <td class="p-3" th:text="${user.bloodGroup}"></td>
+                                <td class="p-3">
+                                    <span th:classappend="${user.status == 'Hoạt động' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}" class="px-2 py-1 rounded text-sm" th:text="${user.status}"></span>
+                                </td>
+                                <td class="p-3 flex space-x-2">
+                                    <a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">Sửa</a>
+                                    <button class="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded" th:onclick="'javascript:openDeleteModal(\'' + ${user.id} + '\')'">Xóa</button>
+                                </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(users)}">
+                                <td colspan="10" class="p-3 text-center text-gray-500">Không tìm thấy người dùng nào.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 flex justify-between items-center">
+                    <p class="text-sm text-gray-600" id="paginationInfo" th:text="'Hiển thị 1-' + ${users.size()} + ' trong số ' + ${users.size()} + ' người dùng'"></p>
+                    <div class="flex space-x-2">
+                        <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" disabled>Trước</button>
+                        <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">Sau</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-red-800 text-white p-4">
+            <div class="container mx-auto text-center">
+                <p>© 2025 Ngân Hàng Máu. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <div id="deleteModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Xác nhận xóa</h2>
+                <p class="text-gray-600 mb-4">Bạn có chắc chắn muốn xóa người dùng này?</p>
+                <div class="flex justify-end space-x-4">
+                    <button class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded" onclick="closeDeleteModal()">Hủy</button>
+                    <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded" onclick="confirmDelete()">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentDeleteUserId;
+
+        function openDeleteModal(userId) {
+            document.getElementById('deleteModal').classList.remove('hidden');
+            currentDeleteUserId = userId;
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+            currentDeleteUserId = null;
+        }
+
+        function confirmDelete() {
+            if (currentDeleteUserId) {
+                window.location.href = '/mvc/admin/users/delete/' + currentDeleteUserId;
+            }
+            closeDeleteModal();
+        }
+
+        // Toggle password visibility - (This script is not needed in this view, but kept for consistency if it was previously here)
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('togglePassword');
+            if (togglePassword) {
+                togglePassword.addEventListener('click', function() {
+                    const passwordInput = document.getElementById('password');
+                    const type = passwordInput.type === 'password' ? 'text' : 'password';
+                    passwordInput.type = type;
+                    this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

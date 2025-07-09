@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tra cứu truyền máu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 40px;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            max-width: 500px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            background-color: #e50914;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c40812;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>Tra cứu truyền máu</h2>
+    <form th:action="@{/user/tra-cuu-truyen-mau}" method="post">
+        <label for="bloodGroup">Chọn nhóm máu của bạn:</label>
+        <select id="bloodGroup" name="bloodGroup" required>
+            <option value="">-- Chọn nhóm máu --</option>
+            <option value="O-">O-</option>
+            <option value="O+">O+</option>
+            <option value="A-">A-</option>
+            <option value="A+">A+</option>
+            <option value="B-">B-</option>
+            <option value="B+">B+</option>
+            <option value="AB-">AB-</option>
+            <option value="AB+">AB+</option>
+        </select>
+        <button type="submit">Tra cứu</button>
+    </form>
+</div>
+</body>
+</html>

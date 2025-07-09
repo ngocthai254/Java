@@ -1,0 +1,20 @@
+<h2>Kết quả tra cứu cho nhóm máu: <span th:text="${bloodGroup}"></span></h2>
+
+<h3>📌 Truyền máu toàn phần:</h3>
+<table border="1">
+  <tr><th>Nhóm máu có thể HIẾN</th><th>Lượng máu hiện có (ml)</th></tr>
+  <tr th:each="entry : ${fullStats}">
+    <td th:text="${entry.key}"></td>
+    <td th:text="${entry.value}"></td>
+  </tr>
+</table>
+
+<h3>💉 Hồng cầu có thể nhận từ:</h3>
+<ul>
+  <li th:each="rbc : ${rbcCompatible}" th:text="${rbc}"></li>
+</ul>
+
+<h3>💧 Huyết tương có thể nhận từ:</h3>
+<ul>
+  <li th:each="plasma : ${plasmaCompatible}" th:text="${plasma}"></li>
+</ul>
